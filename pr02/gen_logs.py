@@ -53,7 +53,7 @@ def line(rng, ts, level, module=None):
 
 def main():
     rng = random.Random(SEED)
-    out = Path("data")
+    out = Path(__file__).resolve().parent / "data"
     out.mkdir(exist_ok=True)
 
     for i in range(1, N_FILES + 1):

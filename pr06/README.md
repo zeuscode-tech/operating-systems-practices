@@ -15,6 +15,19 @@
 - Элементов: 1000
 - `queue.Queue` не используется
 
+## Запуск
+
+```bash
+cd pr06
+python3 race_buffer.py
+python3 semaphore_buffer.py
+python3 condition_buffer.py
+python3 barrier_demo.py
+python3 lost_wakeup.py
+```
+
+`race_buffer.py` и `lost_wakeup.py` намеренно демонстрируют ошибки, поэтому `False` и сообщения о нарушениях в их выводе являются ожидаемым результатом. Исправленные реализации должны завершаться со значениями `True` и без нарушений инвариантов.
+
 ## Проверяемые инварианты
 
 Корректность проверяется программно:

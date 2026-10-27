@@ -126,23 +126,33 @@ FCFS демонстрирует эффект конвоя: короткие пр
 
 ## Запуск
 
+Подготовка окружения из корня репозитория:
+
+```bash
+cd pr05
+python3 -m venv .venv
+source .venv/bin/activate
+python3 -m pip install -r requirements.txt
+```
+
 Примеры команд:
 
-`python3 sched.py --algo fcfs set1.txt`
-
-`python3 sched.py --algo sjf set1.txt`
-
-`python3 sched.py --algo srtf set1.txt`
-
-`python3 sched.py --algo rr --quantum 3 set1.txt`
-
-`python3 sched.py --algo priority set1.txt`
-
-`python3 sched.py --algo priority --aging 2 starvation.txt`
+```bash
+python3 sched.py --algo fcfs set1.txt
+python3 sched.py --algo sjf set1.txt
+python3 sched.py --algo srtf set1.txt
+python3 sched.py --algo rr --quantum 3 set1.txt
+python3 sched.py --algo priority set1.txt
+python3 sched.py --algo priority --aging 2 starvation.txt
+```
 
 Общий анализ и построение графика:
 
-`python3 analysis.py`
+```bash
+python3 analysis.py
+```
+
+Скрипт создаёт таблицу [rr_quantum.csv](rr_quantum.csv) и график [rr_quantum.png](rr_quantum.png).
 
 ## Контрольные вопросы
 

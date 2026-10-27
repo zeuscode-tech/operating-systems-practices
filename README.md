@@ -1,6 +1,6 @@
 # Проектирование операционных систем
 
-Репозиторий содержит восемь практических работ по дисциплине **«Проектирование операционных систем»**.
+Репозиторий содержит восемь практических работ уровня **B** по дисциплине «Проектирование операционных систем».
 
 Автор: [zeuscode-tech](https://github.com/zeuscode-tech)
 
@@ -8,73 +8,61 @@
 
 | № | Тема | Основные результаты |
 |---:|---|---|
-| 1 | [Пользователи, группы и права доступа](https://github.com/zeuscode-tech/operating-systems-practices/tree/main/practice%20-%201) | Пользователи Linux, группы и права на общий каталог |
-| 2 | [Bash и системные вызовы](https://github.com/zeuscode-tech/operating-systems-practices/tree/main/practice%20-%202) | Обработка журналов, Bash, `strace`, сравнение `cat` и Python |
-| 3 | [Процессы в Linux](https://github.com/zeuscode-tech/operating-systems-practices/tree/main/practice%20-%203) | `fork`, `exec`, `wait`, дерево процессов, зомби, сироты и Copy-on-Write |
-| 4 | [Потоки](https://github.com/zeuscode-tech/operating-systems-practices/tree/main/practice%20-%204) | Сравнение потоков и процессов для CPU-bound и I/O-bound задач |
-| 5 | [Симулятор планирования CPU](https://github.com/zeuscode-tech/operating-systems-practices/tree/main/practice%20-%205) | FCFS, SJF, SRTF, Priority, Round Robin, метрики и aging |
-| 6 | [Синхронизация](https://github.com/zeuscode-tech/operating-systems-practices/tree/main/practice%20-%206) | Гонки, мьютексы, семафоры, условные переменные и барьер |
-| 7 | [Межпроцессное взаимодействие](https://github.com/zeuscode-tech/operating-systems-practices/tree/main/practice%20-%207) | FIFO, Unix-сокеты, Pipe и разделяемая память |
-| 8 | [Взаимоблокировки](https://github.com/zeuscode-tech/operating-systems-practices/tree/main/practice%20-%208) | Алгоритм банкира, граф ожидания, TrackedLock и философы |
+| 1 | [Пользователи, группы и права доступа](pr01/) | Пользователи Linux, группы, setgid и права общего каталога |
+| 2 | [Bash и системные вызовы](pr02/) | Анализ журналов, `strace`, сравнение `cat` и Python |
+| 3 | [Процессы в Linux](pr03/) | `/proc`, `fork`, `exec`, `wait`, зомби, сироты и Copy-on-Write |
+| 4 | [Потоки](pr04/) | Потоки и процессы в CPU-bound и I/O-bound задачах, GIL |
+| 5 | [Симулятор планирования CPU](pr05/) | FCFS, SJF, SRTF, Priority, Round Robin и aging |
+| 6 | [Синхронизация](pr06/) | Гонки, мьютексы, семафоры, condition и барьер |
+| 7 | [Межпроцессное взаимодействие](pr07/) | FIFO, Unix-сокеты, Pipe и shared memory |
+| 8 | [Взаимоблокировки](pr08/) | Банкир, граф ожидания, TrackedLock и философы |
 
-## Краткое содержание
+## Требования
 
-### Практическая работа №1 — пользователи и права
+- Ubuntu 22.04 или новее;
+- Python 3.11 или новее;
+- Bash, Git, `strace` и стандартные утилиты Linux;
+- для графика в ПР-5 — `matplotlib`.
 
-Работа с Ubuntu Linux, пользователями, группами, владельцами файлов и разрешениями общего каталога.
+Установка системных инструментов:
 
-### Практическая работа №2 — Bash и системные вызовы
+```bash
+sudo apt update
+sudo apt install -y python3 python3-venv git strace
+```
 
-Сценарий для анализа журналов по уровням ERROR и WARN, режим `--top` и обработка ошибок. Через `strace` исследованы системные вызовы Python и `cat`.
+Зависимость ПР-5:
 
-### Практическая работа №3 — процессы
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r pr05/requirements.txt
+```
 
-Построено дерево процессов по данным `/proc`. Реализован запуск через `fork` и `exec`. Воспроизведены зомби и сирота, исследован Copy-on-Write.
+## Быстрая проверка репозитория
 
-### Практическая работа №4 — потоки
+Из корня репозитория выполните:
 
-Сравнены один поток, четыре потока и четыре процесса в вычислительной и сетевой задачах. Показано влияние GIL и различие в использовании памяти.
+```bash
+python3 check_all.py
+```
 
-### Практическая работа №5 — планирование CPU
+Проверка контролирует структуру каталогов, локальные ссылки README, синтаксис Python и Bash, а также запускает ключевые тесты ПР-2, ПР-3, ПР-5, ПР-6 и ПР-8. На GitHub эта же проверка автоматически выполняется через GitHub Actions.
 
-Реализованы FCFS, SJF, SRTF, Priority и Round Robin. Рассчитаны ожидание, оборот, отклик, загрузка CPU и переключения. Исследованы квант RR и старение приоритетов.
-
-### Практическая работа №6 — синхронизация
-
-Воспроизведено состояние гонки. «Производитель–потребитель» реализован на семафорах и условной переменной. Показана ошибка `if` вместо `while` при ожидании.
-
-### Практическая работа №7 — IPC
-
-Реализованы клиент–сервер через FIFO и Unix-сокеты. Передача массива через Pipe сравнена с `multiprocessing.shared_memory`.
-
-### Практическая работа №8 — взаимоблокировки
-
-Реализованы алгоритм банкира с откатом запросов, DFS-поиск цикла в графе ожидания и `TrackedLock`. Задача философов исправлена двумя способами.
-
-## Используемые технологии
-
-- Ubuntu Linux
-- Python 3
-- Bash
-- Git и GitHub
-- `/proc` и `strace`
-- `threading` и `multiprocessing`
-- FIFO и Unix domain sockets
-- Pipe и Shared Memory
-
-## Структура репозитория
+## Структура
 
 ```text
 operating-systems-practices/
-├── practice - 1/
-├── practice - 2/
-├── practice - 3/
-├── practice - 4/
-├── practice - 5/
-├── practice - 6/
-├── practice - 7/
-├── practice - 8/
+├── pr01/   # пользователи и права
+├── pr02/   # Bash и системные вызовы
+├── pr03/   # процессы
+├── pr04/   # потоки
+├── pr05/   # планирование CPU
+├── pr06/   # синхронизация
+├── pr07/   # IPC
+├── pr08/   # взаимоблокировки
+├── check_all.py
 └── README.md
 ```
 
-Внутри каждой практической находятся исходный код, инструкция по запуску, результаты проверок и подробные выводы.
+Каждая папка содержит собственный `README.md` с целью, командами запуска, результатами и выводами. Работы с `/proc`, `strace`, FIFO и shared memory следует запускать именно в Ubuntu.

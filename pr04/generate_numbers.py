@@ -5,7 +5,7 @@ import random
 import time
 
 COUNT = 10_000_000
-OUTPUT = Path("numbers.txt")
+OUTPUT = Path(__file__).resolve().parent / "numbers.txt"
 SEED = 42
 
 

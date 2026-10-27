@@ -2,7 +2,7 @@
 
 from pathlib import Path
 
-directory = Path("web")
+directory = Path(__file__).resolve().parent / "web"
 directory.mkdir(exist_ok=True)
 
 content = ("Практическая работа по потокам\n" * 4000).encode("utf-8")

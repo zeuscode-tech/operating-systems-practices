@@ -1,0 +1,13 @@
+__pycache__/
+*.py[cod]
+.venv/
+.DS_Store
+
+# Генерируемые данные ПР-4
+pr04/numbers.txt
+pr04/web/
+
+# Временные IPC-ресурсы и логи
+*.fifo
+*.sock
+*.log.tmp

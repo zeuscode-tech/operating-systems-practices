@@ -10,6 +10,25 @@
 - Язык: Python 3
 - Вариант: B
 
+## Запуск
+
+Основные проверки выполняются из каталога работы:
+
+```bash
+cd pr08
+printf 'safe\nquit\n' | python3 banker.py bank1.txt
+printf 'safe\nquit\n' | python3 banker.py bank2.txt
+printf 'request P1 1 0 2\nquit\n' | python3 banker.py bank1.txt
+printf 'request P4 3 3 0\nquit\n' | python3 banker.py bank1.txt
+python3 wait_graph.py events_deadlock.txt
+python3 wait_graph.py events_safe.txt
+python3 deadlock.py
+timeout 3s python3 philosophers_deadlock.py
+python3 philosophers_fixed.py
+```
+
+Команда `timeout` для намеренно зависающей версии философов должна вернуть код `124`. Остальные программы завершаются самостоятельно.
+
 ## 1. Алгоритм банкира
 
 Программа `banker.py` загружает:

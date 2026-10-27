@@ -3,6 +3,7 @@
 import os
 import time
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
+from pathlib import Path
 
 HOST = "127.0.0.1"
 PORT = 8000
@@ -19,7 +20,7 @@ class SlowHandler(SimpleHTTPRequestHandler):
 
 
 def main():
-    os.chdir("web")
+    os.chdir(Path(__file__).resolve().parent / "web")
     server = ThreadingHTTPServer((HOST, PORT), SlowHandler)
 
     print(f"Сервер запущен: http://{HOST}:{PORT}")

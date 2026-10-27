@@ -2,6 +2,7 @@
 
 import multiprocessing as mp
 import os
+from pathlib import Path
 import statistics
 import threading
 import time
@@ -9,6 +10,7 @@ import time
 WORKERS = 4
 REPEATS = 3
 NUMBERS = []
+NUMBERS_PATH = Path(__file__).resolve().parent / "numbers.txt"
 
 
 def sum_range(start, end):
@@ -111,8 +113,8 @@ def measure(name, function, ranges, expected):
 def main():
     global NUMBERS
 
-    print("Загрузка numbers.txt вне измерений...")
-    with open("numbers.txt", encoding="utf-8") as file:
+    print(f"Загрузка {NUMBERS_PATH.name} вне измерений...")
+    with NUMBERS_PATH.open(encoding="utf-8") as file:
         NUMBERS = [int(line) for line in file]
 
     ranges = make_ranges(len(NUMBERS), WORKERS)
