@@ -1,0 +1,19 @@
+# время процесс событие ресурс   (каждый ресурс R1..R7 существует в одном экземпляре)
+# acquire — ресурс выдан; wait — процесс заблокирован в ожидании ресурса; release — ресурс освобождён
+1 P1 acquire R1
+2 P2 acquire R2
+3 P3 acquire R3
+4 P4 acquire R4
+5 P5 acquire R5
+6 P1 acquire R6
+7 P6 acquire R7
+8 P2 wait R1
+9 P1 release R6
+10 P3 wait R4
+11 P5 acquire R6
+12 P4 wait R5
+13 P6 wait R2
+14 P5 wait R3
+15 P1 release R1
+16 P2 acquire R1
+17 P7 wait R6

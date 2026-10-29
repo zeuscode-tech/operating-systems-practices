@@ -1,0 +1,17 @@
+Timeout (0:00:05)!
+Thread 0x0000000172807000 (most recent call first):
+  File "/Users/zeus/Documents/Codex/2026-09-22/b-1-ubuntu-student2-developers-2/project2-deadlocks/transfer_deadlock.py", line 22 in transfer
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/threading.py", line 910 in run
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/threading.py", line 973 in _bootstrap_inner
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/threading.py", line 930 in _bootstrap
+
+Thread 0x00000001717fb000 (most recent call first):
+  File "/Users/zeus/Documents/Codex/2026-09-22/b-1-ubuntu-student2-developers-2/project2-deadlocks/transfer_deadlock.py", line 22 in transfer
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/threading.py", line 910 in run
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/threading.py", line 973 in _bootstrap_inner
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/threading.py", line 930 in _bootstrap
+
+Thread 0x00000001f2ea6180 (most recent call first):
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/threading.py", line 1069 in _wait_for_tstate_lock
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/threading.py", line 1053 in join
+  File "/Users/zeus/Documents/Codex/2026-09-22/b-1-ubuntu-student2-developers-2/project2-deadlocks/transfer_deadlock.py", line 39 in <module>

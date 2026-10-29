@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Быстрая воспроизводимая проверка практических работ № 1–8."""
+"""Воспроизводимая проверка практических работ и проекта модуля 1."""
 
 from __future__ import annotations
 
@@ -44,9 +44,38 @@ def check_structure() -> None:
             f"Нет {directory.name}/README.md"
         )
 
+    module = ROOT / "modul1"
+    required = [
+        "README.md",
+        "DEFENSE_GUIDE.md",
+        "run_all.sh",
+        "transfer_deadlock.py",
+        "transfer_fixed.py",
+        "banker.py",
+        "wait_graph.py",
+        "tracked_lock.py",
+        "transfer_tracked.py",
+        "philosophers.py",
+        "test_project.py",
+        "data/bank_state.txt",
+        "data/bank_state2.txt",
+        "data/requests.txt",
+        "data/waitlog.txt",
+        "presentation/project2-deadlocks-presentation.pdf",
+    ]
+    for relative in required:
+        assert (module / relative).is_file(), f"Нет modul1/{relative}"
+    assert (module / "presentation/project2-deadlocks-presentation.pdf").stat().st_size > 100_000, (
+        "PDF-презентация подозрительно мала"
+    )
+
 
 def check_markdown_links() -> None:
-    readmes = [ROOT / "README.md", *sorted(ROOT.glob("pr*/README.md"))]
+    readmes = [
+        ROOT / "README.md",
+        *sorted(ROOT.glob("pr*/README.md")),
+        ROOT / "modul1/README.md",
+    ]
     broken: list[str] = []
     pattern = re.compile(r"!?\[[^\]]*\]\(([^)]+)\)")
     for readme in readmes:
@@ -62,7 +91,8 @@ def check_markdown_links() -> None:
 
 
 def check_python_syntax() -> None:
-    for path in sorted(ROOT.glob("pr*/*.py")):
+    paths = [*ROOT.glob("pr*/*.py"), *ROOT.glob("modul1/*.py")]
+    for path in sorted(paths):
         ast.parse(path.read_text(encoding="utf-8"), filename=str(path))
 
 
@@ -134,10 +164,50 @@ def check_programs() -> None:
         ("Взаимоблокировки нет: True",),
     )
 
+    module = ROOT / "modul1"
+    run(["bash", "-n", "run_all.sh"], module)
+    run(
+        [sys.executable, "-m", "unittest", "-v", "test_project.py"],
+        module,
+        ("Ran 4 tests", "OK"),
+    )
+    run(
+        [sys.executable, "transfer_fixed.py"],
+        module,
+        ("Инвариант суммы соблюдён: True", "циклическое ожидание"),
+    )
+    run(
+        [
+            sys.executable,
+            "banker.py",
+            "data/bank_state.txt",
+            "data/bank_state2.txt",
+            "--requests",
+            "data/requests.txt",
+        ],
+        module,
+        ("Состояние: SAFE", "Состояние: UNSAFE", "P4 [2, 0, 0]: ERROR"),
+    )
+    run(
+        [sys.executable, "wait_graph.py", "data/waitlog.txt"],
+        module,
+        ("участники: P3, P4, P5", "не входят в него: P7"),
+    )
+    run(
+        [sys.executable, "transfer_tracked.py"],
+        module,
+        ("Обнаружено циклов: 1", "Сумма сохранена: True"),
+    )
+    run(
+        [sys.executable, "philosophers.py", "--duration", "0.2"],
+        module,
+        ("Наивный вариант", "Упорядоченный захват вилок", "Официант"),
+    )
+
 
 def main() -> None:
     checks = [
-        ("Структура pr01–pr08", check_structure),
+        ("Структура pr01–pr08 и modul1", check_structure),
         ("Локальные ссылки README", check_markdown_links),
         ("Синтаксис Python", check_python_syntax),
         ("Ключевые запуски", check_programs),
