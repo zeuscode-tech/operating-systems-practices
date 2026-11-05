@@ -1,0 +1,10 @@
+scenario,allocator,time_ms,peak_rss_kb,external_fragmentation,internal_fragmentation,failures
+small,first,5165.914,8672,0.0159,240518,0
+small,best,4964.113,8672,0.0159,240518,0
+small,glibc,2.087,6748,N/A,N/A,0
+alternating,first,570.099,3168,0.0000,12665,0
+alternating,best,572.055,3168,0.0000,12665,0
+alternating,glibc,1.746,5200,N/A,N/A,0
+large,first,52.149,65304,0.1563,0,0
+large,best,29.105,65376,0.1563,0,0
+large,glibc,17.441,58144,N/A,N/A,0
