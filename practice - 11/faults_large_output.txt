@@ -1,0 +1,5 @@
+malloc 256 MiB: minor=1 major=0
+first touch:      minor=639 major=0
+by rows:    0.024 s
+by columns: 0.705 s  (x29.8)
+checksum: 4503599560261632

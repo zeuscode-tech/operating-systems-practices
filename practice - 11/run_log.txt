@@ -1,0 +1,130 @@
+# run_log ПР-11 / Л-11  2026-11-16T12:39Z
+# Python 3.13.18, matplotlib 3.11.2, gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0, kernel 6.18.44-fc-v470
+
+$ getconf PAGESIZE
+4096
+
+$ grep SwapTotal /proc/meminfo
+SwapTotal:             0 kB
+
+$ free -h
+               total        used        free      shared  buff/cache   available
+Mem:           7.8Gi       389Mi       7.2Gi        16Mi       500Mi       7.5Gi
+Swap:             0B          0B          0B
+
+$ python3 replace_solution.py --plot
+== Контрольная строка, 3 кадра ==
+   FIFO: 15 отказов
+    LRU: 12 отказов
+Optimal: 9 отказов
+  Clock: 14 отказов
+
+== Контрольная строка, 1..8 кадров ==
+кадры |    FIFO |     LRU | Optimal |   Clock
+    1 |      20 |      20 |      20 |      20
+    2 |      15 |      17 |      13 |      15
+    3 |      15 |      12 |       9 |      14
+    4 |      10 |       8 |       8 |       9
+    5 |       9 |       7 |       7 |       9
+    6 |       6 |       6 |       6 |       6
+    7 |       6 |       6 |       6 |       6
+    8 |       6 |       6 |       6 |       6
+
+== Аномалия Белади (строка 1 2 3 4 1 2 5 1 2 3 4 5) ==
+кадры |    FIFO |     LRU | Optimal |   Clock
+    3 |       9 |      10 |       7 |       9
+    4 |      10 |       8 |       6 |      10
+
+== Локальность против случайности (1000 обращений, 20 страниц, 5 кадров) ==
+строка      |    FIFO |     LRU | Optimal |   Clock
+локальная   |     193 |     190 |     140 |     191
+случайная   |     759 |     743 |     491 |     747
+
+график сохранён: faults_vs_frames.png
+
+$ python3 trace.py
+FIFO, 3 кадра
+ 1  обр=7  [7    ]  PF
+ 2  обр=0  [7 0  ]  PF
+ 3  обр=1  [7 0 1]  PF
+ 4  обр=2  [2 0 1]  PF
+ 5  обр=0  [2 0 1]    
+ 6  обр=3  [2 3 1]  PF
+ 7  обр=0  [2 3 0]  PF
+ 8  обр=4  [4 3 0]  PF
+ 9  обр=2  [4 2 0]  PF
+10  обр=3  [4 2 3]  PF
+11  обр=0  [0 2 3]  PF
+12  обр=3  [0 2 3]    
+13  обр=2  [0 2 3]    
+14  обр=1  [0 1 3]  PF
+15  обр=2  [0 1 2]  PF
+16  обр=0  [0 1 2]    
+17  обр=1  [0 1 2]    
+18  обр=7  [7 1 2]  PF
+19  обр=0  [7 0 2]  PF
+20  обр=1  [7 0 1]  PF
+
+LRU, 3 кадра
+ 1  обр=7  [7    ]  PF
+ 2  обр=0  [7 0  ]  PF
+ 3  обр=1  [7 0 1]  PF
+ 4  обр=2  [2 0 1]  PF
+ 5  обр=0  [2 0 1]    
+ 6  обр=3  [2 0 3]  PF
+ 7  обр=0  [2 0 3]    
+ 8  обр=4  [4 0 3]  PF
+ 9  обр=2  [4 0 2]  PF
+10  обр=3  [4 3 2]  PF
+11  обр=0  [0 3 2]  PF
+12  обр=3  [0 3 2]    
+13  обр=2  [0 3 2]    
+14  обр=1  [1 3 2]  PF
+15  обр=2  [1 3 2]    
+16  обр=0  [1 0 2]  PF
+17  обр=1  [1 0 2]    
+18  обр=7  [1 0 7]  PF
+19  обр=0  [1 0 7]    
+20  обр=1  [1 0 7]    
+
+$ python3 replace.py   # шаблон уровня A, TODO не заполнены
+3 кадра: FIFO=15  LRU=TODO  Optimal=TODO
+4 кадра: FIFO=10  LRU=TODO  Optimal=TODO
+
+$ python3 lru_cache.py
+1
+-1
+-1
+3
+4
+
+$ gcc -Wall -Wextra -O2 -o faults faults.c
+(без предупреждений)
+
+$ ./faults   # прогон 1
+malloc 64 MiB: minor=3 major=0
+first touch:      minor=16384 major=0
+by rows:    0.011 s
+by columns: 0.145 s  (x13.5)
+checksum: 281474959933440
+
+$ ./faults   # прогон 2
+malloc 64 MiB: minor=3 major=0
+first touch:      minor=16384 major=0
+by rows:    0.011 s
+by columns: 0.146 s  (x12.8)
+checksum: 281474959933440
+
+$ ./faults   # прогон 3
+malloc 64 MiB: minor=3 major=0
+first touch:      minor=16384 major=0
+by rows:    0.011 s
+by columns: 0.145 s  (x13.3)
+checksum: 281474959933440
+
+$ vmstat 1 3
+procs -----------memory---------- ---swap-- -----io---- -system-- -------cpu-------
+ r  b   swpd   free   buff  cache   si   so    bi    bo   in   cs us sy id wa st gu
+ 0  0      0 7484936  18604 504212    0    0  1095    67   93    0  1  0 99  0  0  0
+ 0  0      0 7484988  18604 504292    0    0     0     0   57   57  0  0 100  0  0  0
+ 0  0      0 7484988  18604 504292    0    0     0     0   60   81  1  0 100  0  0  0
