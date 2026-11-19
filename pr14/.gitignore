@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+.venv/
+io_benchmark
+direct_io
+*.bin
+.DS_Store

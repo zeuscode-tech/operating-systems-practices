@@ -1,0 +1,5 @@
+Оригинал: /var/folders/qm/4crc6x8s725fcgv1cqcdk4nw0000gn/T/pr12.g3aEC3/demo-work/duplicates/two.txt
+  дубликат: /var/folders/qm/4crc6x8s725fcgv1cqcdk4nw0000gn/T/pr12.g3aEC3/demo-work/duplicates/one.txt already-linked=False
+Режим: применено
+Дубликатов: 1
+Потенциальная экономия: 42 байт

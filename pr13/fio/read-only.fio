@@ -1,0 +1,16 @@
+[global]
+ioengine=sync
+direct=1
+runtime=5
+time_based=1
+group_reporting=1
+filename=fio-test.bin
+size=64m
+
+[sequential-read]
+rw=read
+bs=1m
+
+[random-read]
+rw=randread
+bs=4k

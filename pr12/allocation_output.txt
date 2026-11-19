@@ -1,0 +1,4 @@
+method      files failures random_access_steps largest_free_run
+contiguous      3        0                 1.0               34
+linked          3        0                13.3               21
+indexed         3        0                 2.0               45

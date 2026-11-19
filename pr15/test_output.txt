@@ -1,0 +1,11 @@
+test_health (test_app.AppTest) ... ok
+test_info (test_app.AppTest) ... ok
+test_not_found (test_app.AppTest) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.518s
+
+OK
+HTTP 127.0.0.1 "GET /health HTTP/1.1" 200 -
+HTTP 127.0.0.1 "GET /info HTTP/1.1" 200 -
+HTTP 127.0.0.1 "GET /missing HTTP/1.1" 404 -

@@ -16,5 +16,19 @@ jobs:
         with:
           python-version: "3.11"
 
+      - name: Установить системные инструменты
+        run: sudo apt-get update && sudo apt-get install -y build-essential rsync
+
       - name: Запустить проверки
         run: python3 check_all.py
+
+      - name: Собрать и проверить C-программы
+        run: |
+          make -C "practice - 9/allocator-c" clean all
+          "practice - 9/allocator-c/benchmark" first small
+          gcc -std=c11 -Wall -Wextra -Werror -pedantic pr14/io_benchmark.c -o /tmp/pr14-io
+          /tmp/pr14-io 2
+          gcc -std=c11 -Wall -Wextra -Werror pr14/direct_io.c -o /tmp/pr14-direct
+          (cd /tmp && /tmp/pr14-direct)
+          gcc -std=c11 -Wall -Wextra -Werror "practice - 11/faults.c" -o /tmp/pr11-faults
+          /tmp/pr11-faults 512
