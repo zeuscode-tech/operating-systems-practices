@@ -10,7 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 DIRECTORIES = {
     1: "pr01", 2: "pr02", 3: "pr03", 4: "pr04",
     5: "pr05", 6: "pr06", 7: "pr07", 8: "pr08",
-    9: "practice - 9", 10: "pr10", 11: "practice - 11",
+    9: "pr09", 10: "pr10", 11: "pr11",
     12: "pr12", 13: "pr13", 14: "pr14", 15: "pr15", 16: "pr16",
 }
 EVIDENCE = {

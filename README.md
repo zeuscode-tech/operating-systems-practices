@@ -1,6 +1,6 @@
 # Проектирование операционных систем
 
-Полный репозиторий курса: **16 практических работ**, проект первого модуля, результаты запусков и автоматическая проверка на Ubuntu.
+Полный репозиторий курса: **16 практических работ**, проект первого модуля, результаты запусков и автоматическая проверка на Ubuntu. Единая структура `pr01`–`pr16` подготовлена для проверки и переноса работ в индивидуальные задания Classroom 50.
 
 Автор: [zeuscode-tech](https://github.com/zeuscode-tech)
 
@@ -16,9 +16,9 @@
 | 6 | [Синхронизация](pr06/) | race condition, mutex, semaphore, condition, barrier |
 | 7 | [IPC](pr07/) | Pipe, FIFO, Unix socket, shared memory |
 | 8 | [Взаимоблокировки](pr08/) | банкир, wait-for graph, TrackedLock, философы |
-| 9 | [Непрерывное распределение памяти](practice%20-%209/) | first/best/worst fit, coalescing, buddy, C allocator |
+| 9 | [Непрерывное распределение памяти](pr09/) | first/best/worst fit, coalescing, buddy, C allocator |
 | 10 | [Страницы, таблицы и TLB](pr10/) | трансляция адресов, EAT, TLB, многоуровневая таблица |
-| 11 | [Виртуальная память](practice%20-%2011/) | FIFO, LRU, Optimal, Clock, Белади, реальные page faults |
+| 11 | [Виртуальная память](pr11/) | FIFO, LRU, Optimal, Clock, Белади, реальные page faults |
 | 12 | [Файловые системы](pr12/) | inode, ссылки, backup, дедупликация, размещение, FUSE |
 | 13 | [Планирование диска](pr13/) | FCFS, SSTF, SCAN, C-SCAN, LOOK, C-LOOK, fio |
 | 14 | [Подсистема ввода-вывода](pr14/) | буферизация, blocking I/O, page cache, O_DIRECT, модуль ядра |
@@ -69,11 +69,7 @@ sudo apt install -y python3 python3-venv build-essential git strace rsync
 
 ```text
 operating-systems-practices/
-├── pr01/ … pr08/
-├── practice - 9/
-├── pr10/
-├── practice - 11/
-├── pr12/ … pr16/
+├── pr01/ … pr16/
 ├── modul1/
 ├── .github/workflows/check.yml
 ├── check_all.py

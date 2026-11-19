@@ -16,7 +16,7 @@ ROOT = Path(__file__).resolve().parent
 PRACTICES = {
     1: "pr01", 2: "pr02", 3: "pr03", 4: "pr04",
     5: "pr05", 6: "pr06", 7: "pr07", 8: "pr08",
-    9: "practice - 9", 10: "pr10", 11: "practice - 11",
+    9: "pr09", 10: "pr10", 11: "pr11",
     12: "pr12", 13: "pr13", 14: "pr14", 15: "pr15", 16: "pr16",
 }
 
@@ -100,10 +100,10 @@ def check_original_practices() -> None:
 
 
 def check_memory_and_storage() -> None:
-    run([sys.executable, "compare.py"], ROOT / "practice - 9", ("best +merge", "buddy"))
+    run([sys.executable, "compare.py"], ROOT / "pr09", ("best +merge", "buddy"))
     run([sys.executable, "translate.py"], ROOT / "pr10", ("физический адрес 2224", "страница отсутствует"))
     run([sys.executable, "multilevel.py"], ROOT / "pr10", ("Двухуровневая таблица",))
-    run([sys.executable, "replace.py"], ROOT / "practice - 11", ("FIFO: 15", "LRU: 12", "Optimal: 9"))
+    run([sys.executable, "replace.py"], ROOT / "pr11", ("FIFO: 15", "LRU: 12", "Optimal: 9"))
     run([sys.executable, "fs_model.py"], ROOT / "pr12", ("contiguous", "linked", "indexed"))
     run([sys.executable, "disk.py"], ROOT / "pr13", ("FCFS              640", "C-LOOK            322"))
     run([sys.executable, "starvation.py"], ROOT / "pr13", ("Позиция дальнего запроса",))

@@ -24,11 +24,11 @@ jobs:
 
       - name: Собрать и проверить C-программы
         run: |
-          make -C "practice - 9/allocator-c" clean all
-          "practice - 9/allocator-c/benchmark" first small
+          make -C pr09/allocator-c clean all
+          pr09/allocator-c/benchmark first small
           gcc -std=c11 -Wall -Wextra -Werror -pedantic pr14/io_benchmark.c -o /tmp/pr14-io
           /tmp/pr14-io 2
           gcc -std=c11 -Wall -Wextra -Werror pr14/direct_io.c -o /tmp/pr14-direct
           (cd /tmp && /tmp/pr14-direct)
-          gcc -std=c11 -Wall -Wextra -Werror "practice - 11/faults.c" -o /tmp/pr11-faults
+          gcc -std=c11 -Wall -Wextra -Werror pr11/faults.c -o /tmp/pr11-faults
           /tmp/pr11-faults 512
