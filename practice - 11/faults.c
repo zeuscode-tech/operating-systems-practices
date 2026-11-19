@@ -1,3 +1,7 @@
+#if defined(__linux__)
+#define _POSIX_C_SOURCE 200809L
+#endif
+
 /* ПР-11, уровень C. Реальные страничные отказы и обход по строкам/столбцам.
  * Сборка: gcc -Wall -Wextra -O2 -o faults faults.c
  * Запуск: ./faults [N]   (матрица N x N значений int, по умолчанию 4096)
